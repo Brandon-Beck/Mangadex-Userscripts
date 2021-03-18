@@ -807,7 +807,7 @@ function getExistingCoversFromMD() {
   })
 }
 function getSerieseDetailsFromMD(mangadexId: number): Promise<MD_SeriesDetailsJson> {
-  return fetch(`https://mangadex.org/api/manga/${mangadexId}`)
+  return fetch(`https://api.mangadex.org/v2/manga/${mangadexId}`)
     .then((r) => {
       if (r.ok) {
         return r.json().then(j => j)
@@ -899,8 +899,8 @@ function getBW_CoversFromMD() {
       createInterface(allSerialDataPromise ,bookwalkerSerieseUrlPromise)
       setStatusMessage('Checking for BookWalker link')
       // Try to get BW link from MD page
-      if (mangaDexDetails.manga.links) {
-        const { bw } = mangaDexDetails.manga.links
+      if (mangaDexDetails.data.links) {
+        const { bw } = mangaDexDetails.data.links
         if (bw) {
           const usableBw = filterBwLink(`https://bookwalker.jp/${bw}`)
           if (usableBw) {
